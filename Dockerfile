@@ -1,8 +1,6 @@
-FROM golang:1.10.1
+FROM golang:1.10.1-alpine3.7
 
-RUN apt-get update && \
-    apt-get -y --no-install-recommends install python-dev python-pip python-setuptools python-wheel && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache build-base git linux-headers python python-dev py-pip py-setuptools
 
 ADD requirements.txt /root/requirements.txt
 RUN pip install -r /root/requirements.txt
@@ -14,5 +12,4 @@ RUN go get -d github.com/vmware/govmomi && \
     go install github.com/vmware/govmomi/govc github.com/vmware/govmomi/vcsim
 
 EXPOSE 5000 8989 443 80 8080
-
 CMD ["/root/flask_control.py"]
