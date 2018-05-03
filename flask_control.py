@@ -233,11 +233,24 @@ def get_govc_host_info():
     return jsonify(host_output)
 
 
+@app.route('/create_cluster')
+def create_cluster():
+    """
+    Create a managed object for cluster in VCSIM
+    """
+    cluster_obj = request.args.get('name') or None
+    govc_info = {}
+    if cluster_obj:
+        cmd = '%s cluster.create %s 2>&1' % (GOVCPATH, cluster_obj)
+        govc_info['stdout'], govc_info['stderr'] = run_cmd(cmd)
+    return jsonify(govc_info)
+
+
 def _get_host_info(host_name=None):
     """
     Get all information of host from vcsim
-    :param vm_name: Name of host
-    :return: Dictionary containing information about VM,
+    :param host_name: Name of host
+    :return: Dictionary containing information about host,
              where KEY represent attributes and VALUE represent attribute's value
     """
     cmd = '%s host.info -host=%s 2>&1' % (GOVCPATH, host_name)
