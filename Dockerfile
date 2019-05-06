@@ -1,6 +1,6 @@
-FROM golang:1.11.2-alpine3.8
+FROM golang:1.11.9-alpine3.9
 
-ARG GOVMOMI_CHECKOUT="tags/v0.19.0"
+ARG GOVMOMI_CHECKOUT="tags/v0.20.0"
 
 ADD requirements.txt /root/requirements.txt
 
