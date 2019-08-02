@@ -139,7 +139,7 @@ def spawn_vcsim():
     # build the command
     cmd = [
         VCSIMPATH,
-        '-httptest.serve',
+        '-l',
         '%s:%s' % (hostname, port),
     ]
 
