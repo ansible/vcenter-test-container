@@ -1,5 +1,0 @@
-language: python
-
-build:
-  ci:
-    - docker build .
